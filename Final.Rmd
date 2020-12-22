@@ -1,13 +1,15 @@
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 <center>
 <B><font size="5">Credit Card Fraud Detection
 <BR>Final Project Report</font>
 <BR><font size="4">Instructor: Samantha-Jo Caetano
 <BR><I>Yuhan Zhu</I>
-<BR>Date: 12/15/2020</I></font></B></center>
+<BR>Github Link:https://github.com/juliaz1231/final-proj.git
+<BR>Date: 12/22/2020</I></font></B></center>
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 <P>
 <B><font size="4">Abstract</font></B>
 <BR>In this project, a predictive model has been produced for credit card fraud detections. The accuracy score for the model is high enough for using. The reason to predict credit card fraud activities is to secure people's property and money.By doing so, banks can gain more trust from people.
@@ -42,7 +44,8 @@ Lastly, a Hosmer-Lemeshow Test is conducted to test for logistic regression. It 
 <P>
 <B><font size="3">Exploratory Data Analysis:</font></B>
 <P>During the process of EDA, I first imported the dataset and named it as "df". Here is the head of the dataset:<P>
-<P>![alt text here](C:/Users/12069/Desktop/hxn/head.png)
+![Figure 1](C:/Users/12069/Desktop/hxn/head.png)
+
 <P>There are total of 284807 observations of 31 variables. There is 0 missing values. Because the time and the amount have not been transformed. For better model performance, I removed the time variable and changed the "amount" variable by using scale() function. The new dataset was named as "df2" and it contains 284807 observations of 30 variables.<P>
 ```{r,include=FALSE}
 library(tidyverse)
@@ -56,7 +59,8 @@ library(ResourceSelection)
 df <- read.csv("C:/Users/12069/Desktop/hxn/creditcard.csv")
 ```
 <P>The total numbers of "0"s in the dataset is 284315 and the total number of "1"s is 492. Here is a barplot for both classes:<P>
-<P>![](C:/Users/12069/Desktop/hxn/counts.png)
+<P>![Figure 2](C:/Users/12069/Desktop/hxn/counts.png)
+
 ```{r,include=FALSE}
 dim(df)
 sum(is.na(df))
@@ -74,7 +78,8 @@ barplot(table(df2$Class),  main = "Total Counts of Classes",
 )
 ```
 <P>The next step is to find correlations among variables. A correplot was conducted by using "corrplot" function. It plots all the attributes and the plot is shown below:<P>
-<P>![alt text here](C:/Users/12069/Desktop/hxn/heatmap.png)
+<P>![Figure 3](C:/Users/12069/Desktop/hxn/heatmap.png)
+
 <P>From the plot, I found that it is hard to tell if the correlation between variables.<P>
 ```{r,include=FALSE}
 correlations <- cor(df,method="pearson")
@@ -84,15 +89,20 @@ corrplot(correlations, number.cex = .9, method = "square", type = "full", tl.cex
 <B><font size="3">Predictive analysis:</font></B>
 <P>Now the data has been preprocessed. It is time to build a good predictive model.
 First step is to create the train and test dataset.I splitted the origional dataset by using ratio 7:3. So 70% of the dataset is training set, and 30% of the dataset is testing set.Then I generated a logistic regression model by using glm(Class~., train, family = binomial(link = "logit")). In this function, Class was the reponse variable and the rest are independent variable. Here is a summary for the model:<P>
-<P>![alt text here](C:/Users/12069/Desktop/hxn/logisticregressionsummary.png)<P>
+<P>![Figure 4](C:/Users/12069/Desktop/hxn/logisticregressionsummary.png)
+
 <P>Then I plotted the model and here are four plots:<P>
-<P>![alt text here](C:/Users/12069/Desktop/hxn/residvsfits.png)<P>
+<P>![Figure 5](C:/Users/12069/Desktop/hxn/residvsfits.png)
+
 <P>In the "Residuals vs fitted" plot, there are three out liers with large residual values.THe red line and the dashed line are almost perfectly attached.<P>
-<P>![alt text here](C:/Users/12069/Desktop/hxn/qqnorm.png)<P>
+<P>![Figure 6](C:/Users/12069/Desktop/hxn/qqnorm.png)
+
 <P>In the Normal Q-Q plot, it clearly shows that the distribution is not normal because it is heavily tailed at each end.<P>
-<P>![alt text here](C:/Users/12069/Desktop/hxn/scalelotion.png)<P>
+<P>![Figure 7](C:/Users/12069/Desktop/hxn/scalelotion.png)
+
 <P>In the scale-location plot, the red line fits the dots pretty well and it is roughly horizontal, which indicates the spread of residuals is roughly equal at all fitted values.<P>
-<P>![alt text here](C:/Users/12069/Desktop/hxn/resivslev.png)<P>
+<P>![Figure 8](C:/Users/12069/Desktop/hxn/resivslev.png)
+
 <P>By looking at the residuals vs leverage plot, it is unclear to see any information because of outliers.
 
 ```{r,include=FALSE}
@@ -104,12 +114,15 @@ dim(train)
 dim(test)
 ```
 <P>After creating the logistic regression model, I used it to predict y values by using testing set and named the predicted values as "predict".Here is the table of predicted value and test value:
-<P>![alt text here](C:/Users/12069/Desktop/hxn/table.png)
+<P>![Figure 9](C:/Users/12069/Desktop/hxn/table.png)
+
 <P>I then calculated the RMSE value, which stands for root-mean-square-error. Here is its formula:
-<P>![alt text here](C:/Users/12069/Desktop/hxn/frmula.png)
+<P>![Figure 10](C:/Users/12069/Desktop/hxn/frmula.png)
+
 <P>The value I got is 5.64486934348491. The model accuracy is 0.999040295869761 and the error rate of the model is 0.00107674121929239.I also created an ROC curve for the logistic regression model.ROC curve indicates the performance of a classfication model.Specificity stands for False positive rate, and sensitivity stands for true positive rate.
-<P>![alt text here](C:/Users/12069/Desktop/hxn/roccurve.png)
-<P>![alt text here](C:/Users/12069/Desktop/hxn/printcurve.png)
+<P>![Figure 11](C:/Users/12069/Desktop/hxn/roccurve.png)
+
+<P>![Figure 12](C:/Users/12069/Desktop/hxn/printcurve.png)
 
 ```{r,include=FALSE}
 logistic_regression_model = glm(Class~., train, family = binomial(link = "logit"))
@@ -134,8 +147,10 @@ print(paste('Error rate of model:',mean((predict & test$Class==0) | (predict & t
 ```
 <P>The area under the curve, which is AUC, is 0.7668 and it shows an acceptable result.
 <P>I also used Hosmer-Lemeshow test to do a goodness of fit test for the logistic model I produced and then I ggplot the test.Here are the GOF table and ggplot:
-<P>![alt text here](C:/Users/12069/Desktop/hxn/GOODFITDATA.png)
-<P>![alt text here](C:/Users/12069/Desktop/hxn/GOODFITPLOT.png)
+<P>![Figure 13](C:/Users/12069/Desktop/hxn/GOODFITDATA.png)
+
+<P>![Figure 14](C:/Users/12069/Desktop/hxn/GOODFITPLOT.png)
+
 <P>By looking at the GOF test table, the p value is 0.1166.
 ```{r,include=FALSE}
 hosmer_t <- hoslem.test(logistic_regression_model$y, fitted(logistic_regression_model))
@@ -159,6 +174,7 @@ After finishing data preprocessing, a logistic model was produced. The RMSE is 5
 The weakness of the analysis is the lack of comparisons between models. Due to the lack of knowledge I have learned about big data, I didn't know what other models are good for a binary dataset. I have tried usng linear regression, postStratification; however, they both didn't work well and console kept getting errors. so I removed them in the coding process.
 
 In the future, I would like to apply decision tree, random forest and other popular classification models for this project. I have browsed online and these algorithms are good for classification datasets.By comparing different models, I could choose the best one to be my final result.
+
 <P>
 <B><font size="4">References</font></B>
 <P>Credit Card Fraud. (2016, June 15). Retrieved December 16, 2020, from https://www.fbi.gov/scams-and-safety/common-scams-and-crimes/credit-card-fraud
